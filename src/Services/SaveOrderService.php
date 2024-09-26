@@ -10,7 +10,6 @@ class SaveOrderService
         $this->createFileIfNotExists();
     }
 
-    // Save the given order to the specified file
     public function saveOrder(array $order)
     {
         $data = json_encode($order, JSON_PRETTY_PRINT);
@@ -19,7 +18,6 @@ class SaveOrderService
         }
     }
 
-    // Create the order file if it does not exist
     private function createFileIfNotExists()
     {
         $dir = dirname($this->orderFile);
@@ -29,12 +27,11 @@ class SaveOrderService
         }
 
         if (!file_exists($this->orderFile)) {
-            file_put_contents($this->orderFile, json_encode([])); // Create an empty JSON file
-            chmod($this->orderFile, 0666); // Set permissions to read/write
+            file_put_contents($this->orderFile, json_encode([])); 
+            chmod($this->orderFile, 0666); 
         }
     }
 
-    // Load the saved order from the file
     public function loadOrder()
     {
         if (!file_exists($this->orderFile)) {
